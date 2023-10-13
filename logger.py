@@ -1,9 +1,11 @@
+import allure
 import datetime
+from json import JSONDecodeError
+import json
 import os
 from requests import Response
 from typing import List
-from json import JSONDecodeError
-import json
+
 
 class Logger:
     file_name = f"logs/log_" + \
@@ -34,6 +36,9 @@ class Logger:
 
         cls._write_log_to_file(data_to_add)
 
+        with allure.step("Request Details"):
+            allure.attach(data_to_add, name="Request Details", attachment_type=allure.attachment_type.TEXT)
+
     @classmethod
     def add_response(cls, response: Response):
         headers_as_dict = dict(response.headers)
@@ -53,6 +58,9 @@ class Logger:
 
         cls._write_log_to_file(data_to_add)
 
+        with allure.step("Response Details"):
+            allure.attach(data_to_add, name="Response Details", attachment_type=allure.attachment_type.TEXT)
+
     @classmethod
     def add_sql_result(cls, result: List[tuple]):
         testname = os.environ.get('PYTEST_CURRENT_TEST')
@@ -61,3 +69,6 @@ class Logger:
         data_to_add += f"SQL result: {result}\n"
         data_to_add += "\n-----\n"
         cls._write_log_to_file(data_to_add)
+
+        with allure.step("SQL Result"):
+            allure.attach(data_to_add, name="SQL Result", attachment_type=allure.attachment_type.TEXT)

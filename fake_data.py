@@ -23,14 +23,13 @@ class FakeData:
         return age
 
     @staticmethod
-    def big_string():
-        length = 101
+    def big_string(length=101):
         big_string = ''.join(choice(string.ascii_letters + string.digits) for _ in range(length))
         return big_string
 
     @staticmethod
-    def random_int():
-        random_int = randint(0, 100)
+    def random_int(min=0, max=100):
+        random_int = randint(min, max)
         return random_int
 
     @staticmethod

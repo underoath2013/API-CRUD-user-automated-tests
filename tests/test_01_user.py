@@ -1,3 +1,4 @@
+import allure
 import pytest
 from my_requests import MyRequests
 from basic_assertions import Response
@@ -13,7 +14,7 @@ error_message_int_min_value = "ensure this value is greater than or equal to 0"
 error_message_int_max_value = "ensure this value is less than or equal to 100"
 error_required_field = "field required"
 
-
+@allure.epic("User test cases")
 class TestUser:
 
     def test_get_get_all_users_200(self):

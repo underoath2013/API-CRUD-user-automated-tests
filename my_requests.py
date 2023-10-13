@@ -1,3 +1,4 @@
+import allure
 import requests
 from logger import Logger
 from environment import ENV_OBJECT
@@ -6,19 +7,23 @@ from environment import ENV_OBJECT
 class MyRequests():
     @staticmethod
     def post(url: str, data: dict = None, headers: dict = None, json: dict = None, cookies=None, files=None):
-        return MyRequests._send(url, data, headers, json, cookies, files, "POST")
+        with allure.step(f"POST request to URL '{url}'"):
+            return MyRequests._send(url, data, headers, json, cookies, files, "POST")
 
     @staticmethod
     def get(url: str, data: dict = None, headers: dict = None, json: dict = None, cookies=None, files=None):
-        return MyRequests._send(url, data, headers, json, cookies, files, "GET")
+        with allure.step(f"GET request to URL '{url}'"):
+            return MyRequests._send(url, data, headers, json, cookies, files, "GET")
 
     @staticmethod
     def put(url: str, data: dict = None, headers: dict = None, json: dict = None, cookies=None, files=None):
-        return MyRequests._send(url, data, headers, json, cookies, files, "PUT")
+        with allure.step(f"PUT request to URL '{url}'"):
+            return MyRequests._send(url, data, headers, json, cookies, files, "PUT")
 
     @staticmethod
     def delete(url: str, data: dict = None, headers: dict = None, json: dict = None, cookies=None, files=None):
-        return MyRequests._send(url, data, headers, json, cookies, files, "DELETE")
+        with allure.step(f"DELETE request to URL '{url}'"):
+            return MyRequests._send(url, data, headers, json, cookies, files, "DELETE")
 
     @staticmethod
     def _send(url: str, data: dict, headers: dict, json: dict, cookies: dict, files: dict, method: str):
