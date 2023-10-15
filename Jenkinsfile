@@ -26,15 +26,19 @@ pipeline {
         stage('Run Tests') {
             steps {
                 script {
-                    sh """
-                    rm -rf allure-report
-                    rm -rf allure-results
-                    python3 -m venv venv
-                    . venv/bin/activate
-                    pip install -r requirements.txt
-                    pytest
-                    \${ALLURE_PATH} generate \${ALLURE_RESULTS} -c
-                    """
+                    try {
+                        sh """
+                        rm -rf allure-report
+                        rm -rf allure-results
+                        python3 -m venv venv
+                        . venv/bin/activate
+                        pip install -r requirements.txt
+                        pytest
+                        \${ALLURE_PATH} generate \${ALLURE_RESULTS} -c
+                        """
+                    } catch (Exception e) {
+                        currentBuild.result = 'FAILURE'
+                    }
                 }
             }
         }

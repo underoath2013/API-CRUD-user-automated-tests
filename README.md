@@ -1,5 +1,7 @@
 # API-CRUD-user-automated-tests  
 ![](/project_logo.jpg "")  
+[Demo video Jenkins](https://youtu.be/4JOUfq_fvq0)  
+[Demo video Local](https://youtu.be/WBD1lMeQXAY)  
 API автотесты проекта CRUD User Fastapi с использованием pytest + requests  
 Подготовка тестового окружения под Windows:
 1. Установить Docker Desktop  
