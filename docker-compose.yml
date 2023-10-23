@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  api-tests:
+    build:
+      context: .
+      dockerfile: tests/Dockerfile
+    environment:
+      POSTGRES_HOST: 'fast-api-user-example-postgresql-1'
+      HOST: 'http://fast-api-user-example-api-1:8000'
+    networks:
+      - fast-api-user-example_default
+
+networks:
+  fast-api-user-example_default:
+    external: true
